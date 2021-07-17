@@ -36,7 +36,10 @@ namespace APIProdutos.Controllers
                     new GenericIdentity(usuario.ID, "Login"),
                     new[] {
                         new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString("N")),
-                        new Claim(JwtRegisteredClaimNames.UniqueName, usuario.ID)
+                        new Claim(JwtRegisteredClaimNames.UniqueName, usuario.ID),  
+                        
+                        //Elton: adicao de claim customizada
+                        new Claim("ClaimCustomizada","ADMIN")
                     }
                 );
 
