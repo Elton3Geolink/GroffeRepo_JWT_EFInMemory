@@ -21,10 +21,11 @@ namespace APIProdutos.Controllers
             [FromServices]SigningConfigurations signingConfigurations,
             [FromServices]TokenConfigurations tokenConfigurations)
         {
+            Usuario usuarioBase = null;
             bool credenciaisValidas = false;
             if (usuario != null && !String.IsNullOrWhiteSpace(usuario.ID))
             {
-                var usuarioBase = usrService.Obter(usuario.ID);
+                usuarioBase = usrService.Obter(usuario.ID);
                 credenciaisValidas = (usuarioBase != null &&
                     usuario.ID == usuarioBase.ID &&
                     usuario.ChaveAcesso == usuarioBase.ChaveAcesso);
@@ -38,6 +39,9 @@ namespace APIProdutos.Controllers
                         new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString("N")),
                         new Claim(JwtRegisteredClaimNames.UniqueName, usuario.ID),  
                         
+                         //Elton: Adicao de Claim do tipo Role para que seja possivel autolizar de acordo com a Role(Perfil do usuario)
+                        new Claim(ClaimTypes.Role, usuarioBase.Perfil.ToUpper()),
+ 
                         //Elton: adicao de claim customizada
                         new Claim("ClaimCustomizada","ADMIN")
                     }

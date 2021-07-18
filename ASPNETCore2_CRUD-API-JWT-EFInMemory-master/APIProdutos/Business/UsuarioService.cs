@@ -18,8 +18,10 @@ namespace APIProdutos.Business
 
         public Usuario Obter(string id)
         {
-            return _context.Usuarios.Where(
+            Usuario usuario = _context.Usuarios.Where(
                 u => u.ID == id).FirstOrDefault();
+
+            return usuario;
         }
 
         public void Incluir(Usuario dadosUsuario)

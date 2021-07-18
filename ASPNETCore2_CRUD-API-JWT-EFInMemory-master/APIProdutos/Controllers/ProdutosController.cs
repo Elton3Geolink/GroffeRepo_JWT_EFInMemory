@@ -50,5 +50,31 @@ namespace APIProdutos.Controllers
         {
             return _service.Excluir(codigoBarras);
         }
+
+
+        http://localhost:54861/api/produtos/admin/12345.6
+        [Authorize(Roles = "ADMIN")]
+        [HttpGet("admin/{codigoBarras}")]
+        public IActionResult GetByAdmin(string codigoBarras)
+        {
+            var produto = _service.Obter(codigoBarras);
+            if (produto != null)
+                return new ObjectResult(produto);
+            else
+                return NotFound();
+        }
+
+        //Exemplo de request: http://localhost:54861/api/produtos/comum/12345.6
+
+        [Authorize(Roles = "ADMIN,COMUM")]
+        [HttpGet("comum/{codigoBarras}")]
+        public IActionResult GetByComum(string codigoBarras)
+        {
+            var produto = _service.Obter(codigoBarras);
+            if (produto != null)
+                return new ObjectResult(produto);
+            else
+                return NotFound();
+        }
     }
 }

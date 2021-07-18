@@ -78,9 +78,9 @@ namespace APIProdutos
             UsuarioService usrService)
         {
             usrService.Incluir(
-                new Usuario() { ID = "usuario01", ChaveAcesso = "94be650011cf412ca906fc335f615cdc" });
+                new Usuario() { ID = "usuario01", ChaveAcesso = "94be650011cf412ca906fc335f615cdc", Perfil = "ADMIN" });
             usrService.Incluir(
-                new Usuario() { ID = "usuario02", ChaveAcesso = "531fd5b19d58438da0fd9afface43b3c" });
+                new Usuario() { ID = "usuario02", ChaveAcesso = "531fd5b19d58438da0fd9afface43b3c", Perfil = "COMUM" });
 
             if (env.IsDevelopment())
             {
